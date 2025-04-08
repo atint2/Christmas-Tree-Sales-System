@@ -16,35 +16,64 @@ public class TransactionFactory
 	 *
 	 */
 	//----------------------------------------------------------
-	public static Transaction createTransaction(String transType,
-		AccountHolder cust)
+	public static Transaction createTransaction(String transType)
 		throws Exception
 	{
 		Transaction retValue = null;
 
-		if (transType.equals("Deposit") == true)
+		if (transType.equals("StartShift"))
 		{
-			retValue = new DepositTransaction(cust);
+			retValue = new StartShiftTransaction();
 		}
 		else
-		if (transType.equals("Withdraw") == true)
+		if (transType.equals("EndShift"))
 		{
-			retValue = new WithdrawTransaction(cust);
+			retValue = new EndShiftTransaction();
 		}
 		else
-		if (transType.equals("Transfer") == true)
+		if (transType.equals("AddScout"))
 		{
-			retValue = new TransferTransaction(cust);
+			retValue = new AddScoutTransaction();
 		}
 		else
-		if (transType.equals("BalanceInquiry") == true)
+		if (transType.equals("UpdateScout"))
 		{
-			retValue = new BalanceInquiryTransaction(cust);
+			retValue = new UpdateScoutTransaction();
 		}
 		else
-		if (transType.equals("ImposeServiceCharge") == true)
+		if (transType.equals("RemoveScout"))
 		{
-			retValue = new ImposeServiceChargeTransaction(cust);
+			retValue = new RemoveScoutTransaction();
+		}
+		else
+		if (transType.equals("AddTreeType"))
+		{
+			retValue = new AddTreeTypeTransaction();
+		}
+		else
+		if (transType.equals("AddTree"))
+		{
+			retValue = new AddTreeTransaction();
+		}
+		else
+		if (transType.equals("UpdateTreeType"))
+		{
+			retValue = new UpdateTreeTypeTransaction();
+		}
+		else
+		if (transType.equals("UpdateTree"))
+		{
+			retValue = new UpdateTreeTransaction();
+		}
+		else
+		if (transType.equals("RemoveTree"))
+		{
+			retValue = new RemoveTreeTransaction();
+		}
+		else
+		if (transType.equals("SellTree"))
+		{
+			retValue = new SellTreeTransaction();
 		}
 
 		return retValue;
