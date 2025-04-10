@@ -20,7 +20,7 @@ public class TransactionFactory
 		throws Exception
 	{
 		Transaction retValue = null;
-
+/*
 		if (transType.equals("StartShift"))
 		{
 			retValue = new StartShiftTransaction();
@@ -76,6 +76,8 @@ public class TransactionFactory
 			retValue = new SellTreeTransaction();
 		}
 
+
+ */
 		return retValue;
 	}
 }

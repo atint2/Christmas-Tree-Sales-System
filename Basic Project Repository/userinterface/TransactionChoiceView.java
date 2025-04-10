@@ -292,7 +292,7 @@ public class TransactionChoiceView extends View {
                 System.exit(0);
             }
         });
-        doneCont.getChildren().add(doneCont);
+        doneCont.getChildren().add(doneButton);
 
         container.getChildren().add(doneCont);
 
