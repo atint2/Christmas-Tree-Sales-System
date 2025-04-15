@@ -109,6 +109,11 @@ public class Tree extends EntityBase implements IView {
             mySchema = getSchemaInfo(tableName);
         }
     }
-    public void
+    public static int compare(Tree a, Tree b)
+    {
+        String aNum = (String)a.getState("AccountNumber");
+        String bNum = (String)b.getState("AccountNumber");
 
+        return aNum.compareTo(bNum);
+    }
 }

@@ -62,11 +62,11 @@ public class TreeCollection  extends EntityBase implements IView
             {
                 Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
 
-                Account account = new Account(nextAccountData);
+                Tree tree = new Tree(nextAccountData);
 
-                if (account != null)
+                if (tree != null)
                 {
-                    addAccount(account);
+                    addAccount(tree);
                 }
             }
 
@@ -92,7 +92,7 @@ public class TreeCollection  extends EntityBase implements IView
     }
 
     //----------------------------------------------------------------------------------
-    private int findIndexToAdd(Account a)
+    private int findIndexToAdd(Tree a)
     {
         //users.add(u);
         int low=0;
@@ -148,12 +148,12 @@ public class TreeCollection  extends EntityBase implements IView
     }
 
     //----------------------------------------------------------
-    public Account retrieve(String accountNumber)
+    public Tree retrieve(String accountNumber)
     {
-        Account retValue = null;
+        Tree retValue = null;
         for (int cnt = 0; cnt < trees.size(); cnt++)
         {
-            Account nextAcct = trees.elementAt(cnt);
+            Tree nextAcct = trees.elementAt(cnt);
             String nextAccNum = (String)nextAcct.getState("AccountNumber");
             if (nextAccNum.equals(accountNumber) == true)
             {
