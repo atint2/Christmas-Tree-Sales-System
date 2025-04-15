@@ -221,14 +221,14 @@ public class Scout extends EntityBase implements IView
     {
         Vector<String> v = new Vector<String>();
 
-
+        
         v.addElement(persistentState.getProperty("firstName"));
         v.addElement(persistentState.getProperty("lastName"));
         v.addElement(persistentState.getProperty("middleName"));
         v.addElement(persistentState.getProperty("birthday"));
-        v.addElement(persistentState.getProperty("phone"));
-        v.addElement(persistentState.getProperty("email"));
-        v.addElement(persistentState.getProperty("scoutId"));
+		v.addElement(persistentState.getProperty("phone"));
+		v.addElement(persistentState.getProperty("email"));
+		v.addElement(persistentState.getProperty("scoutId"));
 
         return v;
     }
