@@ -27,47 +27,46 @@ import impresario.ControlRegistry;
 
 //==============================================================
 public abstract class View extends Group
-	implements IView, IControl
+		implements IView, IControl
 {
 	// private data
 	protected IModel myModel;
 	protected ControlRegistry myRegistry;
-	
-	
+
+
 	// GUI components
-	
-		
+
+
 	// Class constructor
 	//----------------------------------------------------------
 	public View(IModel model, String classname)
 	{
 		myModel = model;
-		
+
 		myRegistry = new ControlRegistry(classname);
 	}
-	
-	
+
+
 	//----------------------------------------------------------
 	public void setRegistry(ControlRegistry registry)
 	{
 		myRegistry = registry;
 	}
-	
+
 	// Allow models to register for state updates
 	//----------------------------------------------------------
 	public void subscribe(String key,  IModel subscriber)
 	{
 		myRegistry.subscribe(key, subscriber);
 	}
-		
-		
+
+
 	// Allow models to unregister for state updates
 	//----------------------------------------------------------
 	public void unSubscribe(String key, IModel subscriber)
 	{
 		myRegistry.unSubscribe(key, subscriber);
 	}
-	
-   	
-}
 
+
+}

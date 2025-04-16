@@ -47,8 +47,8 @@ public class TransactionChoiceView extends View {
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public TransactionChoiceView(IModel teller) {
-        super(teller, "TransactionChoiceView");
+    public TransactionChoiceView(IModel treeLotCoordinator) {
+        super(treeLotCoordinator, "TransactionChoiceView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -57,13 +57,10 @@ public class TransactionChoiceView extends View {
         // Add a title for this panel
         container.getChildren().add(createTitle());
 
-        // how do you add white space?
-        container.getChildren().add(new Label(" "));
-
         // create our GUI components, add them to this Container
         container.getChildren().add(createFormContents());
 
-        container.getChildren().add(createStatusLog("             "));
+        container.getChildren().add(createStatusLog("                    "));
 
         getChildren().add(container);
 
@@ -99,7 +96,7 @@ public class TransactionChoiceView extends View {
     private VBox createFormContents() {
 
         // Create container which holds all content
-        VBox container = new VBox(15);
+        VBox container = new VBox(8);
 
         // Create font
         Font myFont = Font.font("Garamond", FontWeight.BOLD, 15);
@@ -316,7 +313,7 @@ public class TransactionChoiceView extends View {
 
     //---------------------------------------------------------
     public void updateState(String key, Object value) {
-        if (key.equals("TransactionError") == true) {
+        if (key.equals("TransactionError")) {
             // display the passed text
             displayErrorMessage((String) value);
         }
