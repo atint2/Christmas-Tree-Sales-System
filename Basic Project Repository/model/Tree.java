@@ -1,180 +1,119 @@
 package model;
-import java.sql.SQLException;
+
+import exception.InvalidPrimaryKeyException;
+import impresario.IView;
+
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
-import javax.swing.JFrame;
-import exception.InvalidPrimaryKeyException;
-import database.*;
-import impresario.IView;
-import userinterface.View;
-import userinterface.ViewFactory;
 
-/** The class containing the Account for the ATM application */
-//==============================================================
 public class Tree extends EntityBase implements IView {
-    private static final String myTableName = "Tree";
-
+    private static final String myTableName = "Account";
     protected Properties dependencies;
 
-    // GUI Components
     private String updateStatusMessage = "";
 
-    // constructor to retrieve existing Tree
-    public Tree(String barcode) throws InvalidPrimaryKeyException {
+    public Tree(String barcode)  throws InvalidPrimaryKeyException {
         super(myTableName);
 
         setDependencies();
-        String query = "SELECT * FROM " + myTableName + " WHERE (barcode = '" + barcode + "')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (AccountNumber = " + barcode + ")";
 
         Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
-        if (allDataRetrieved != null) {
+        // You must get one account at least
+        if (allDataRetrieved != null)
+        {
             int size = allDataRetrieved.size();
 
-            if (size != 1) {
-                throw new InvalidPrimaryKeyException("Multiple trees matching barcode: " + barcode + " found.");
-            } else {
-                Properties retrievedTreeData = allDataRetrieved.elementAt(0);
+            // There should be EXACTLY one account. More than that is an error
+            if (size != 1)
+            {
+                throw new InvalidPrimaryKeyException("Multiple accounts matching id : "
+                        + barcode + " found.");
+            }
+            else
+            {
+                // copy all the retrieved data into persistent state
+                Properties retrievedAccountData = allDataRetrieved.elementAt(0);
                 persistentState = new Properties();
 
-                Enumeration allKeys = retrievedTreeData.propertyNames();
-                while (allKeys.hasMoreElements()) {
-                    String nextKey = (String) allKeys.nextElement();
-                    String nextValue = retrievedTreeData.getProperty(nextKey);
+                Enumeration allKeys = retrievedAccountData.propertyNames();
+                while (allKeys.hasMoreElements() == true)
+                {
+                    String nextKey = (String)allKeys.nextElement();
+                    String nextValue = retrievedAccountData.getProperty(nextKey);
+                    // accountNumber = Integer.parseInt(retrievedAccountData.getProperty("accountNumber"));
 
-                    if (nextValue != null) {
+                    if (nextValue != null)
+                    {
                         persistentState.setProperty(nextKey, nextValue);
                     }
                 }
+
             }
-        } else {
-            throw new InvalidPrimaryKeyException("No tree matching barcode: " + barcode + " found.");
+        }
+        // If no account found for this user name, throw an exception
+        else
+        {
+            throw new InvalidPrimaryKeyException("No account matching id : "
+                    + barcode + " found.");
         }
     }
 
-    // Constructor for creating a new Tree
-    public Tree() {
+    public Tree(Properties props)
+    {
         super(myTableName);
+
         setDependencies();
         persistentState = new Properties();
-    }
-
-    // Constructor for updating a Tree
-    public Tree(Properties props) {
-        super(myTableName);
-        setDependencies();
-        persistentState = new Properties();
-
-        Enumeration<?> allKeys = props.propertyNames();
-        while (allKeys.hasMoreElements()) {
-            String nextKey = (String) allKeys.nextElement();
+        Enumeration allKeys = props.propertyNames();
+        while (allKeys.hasMoreElements() == true)
+        {
+            String nextKey = (String)allKeys.nextElement();
             String nextValue = props.getProperty(nextKey);
 
-            if (nextValue != null) {
+            if (nextValue != null)
+            {
                 persistentState.setProperty(nextKey, nextValue);
             }
         }
     }
 
-    private void setDependencies() {
+
+    private void setDependencies()
+    {
         dependencies = new Properties();
+
         myRegistry.setDependencies(dependencies);
     }
 
-    // Removes a tree from the system if not sold
-    public String remove() {
-        String currentStatus = persistentState.getProperty("status");
-
-        if ("Sold".equalsIgnoreCase(currentStatus)) {
-            return "Error: Cannot remove tree. Tree is already sold.";
-        }
-
-        try {
-            Properties whereClause = new Properties();
-            whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
-
-            deletePersistentState(mySchema, whereClause);
-            return "Success: Tree with barcode " + persistentState.getProperty("barcode") + " has been removed.";
-        } catch (SQLException e) {
-            return "Error: Could not remove tree from the database.";
-        }
-    }
-
     public Object getState(String key) {
-        if (key.equals("UpdateStatusMessage"))
+        if (key.equals("UpdateStatusMessage") == true)
             return updateStatusMessage;
 
         return persistentState.getProperty(key);
-    }
-
-    public static int compare(Tree a, Tree b) {
-        String aNum = (String) a.getState("barcode");
-        String bNum = (String) b.getState("barcode");
-
-        return aNum.compareTo(bNum);
-    }
-
-    public void stateChangeRequest(String key, Object value) {
+    };
+    public void stateChangeRequest(String key, Object value)
+    {
         myRegistry.updateSubscribers(key, this);
     }
-
-    public void updateState(String key, Object value) {
+    public void updateState(String key, Object value)
+    {
         stateChangeRequest(key, value);
     }
-
-    public void save() {
-        updateStateInDatabase();
-    }
-
-    private void updateStateInDatabase() {
-        try {
-            if (persistentState.getProperty("barcode") != null) {
-                // update
-                Properties whereClause = new Properties();
-                whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
-                updatePersistentState(mySchema, persistentState, whereClause);
-                updateStatusMessage = "Tree with barcode: " + persistentState.getProperty("barcode") +
-                        " updated successfully in database!";
-            } else {
-                // insert
-                insertPersistentState(mySchema, persistentState);
-                updateStatusMessage = "New tree inserted into database!";
-            }
-        } catch (SQLException ex) {
-            updateStatusMessage = "Error in adding/updating Tree in database!";
-        }
-    }
-
-    // Returns a view-friendly list of tree data
-    public Vector<String> getEntryListView() {
-        Vector<String> v = new Vector<String>();
-
-        v.addElement(persistentState.getProperty("barcode"));
-        v.addElement(persistentState.getProperty("treeType"));
-        v.addElement(persistentState.getProperty("notes"));
-        v.addElement(persistentState.getProperty("status"));
-        v.addElement(persistentState.getProperty("dateStatusUpdated"));
-
-        return v;
-    }
-
-    protected void initializeSchema(String tableName) {
-        if (mySchema == null) {
+    protected void initializeSchema(String tableName)
+    {
+        if (mySchema == null)
+        {
             mySchema = getSchemaInfo(tableName);
         }
     }
+    public static int compare(Tree a, Tree b)
+    {
+        String aNum = (String)a.getState("AccountNumber");
+        String bNum = (String)b.getState("AccountNumber");
 
-    public void display() {
-        System.out.println(toString());
+        return aNum.compareTo(bNum);
     }
-
-    //@Override
-    //public String toString() {
-    //    return "Barcode: " + persistentState.getProperty("barcode") +
-    //            "; Tree Type: " + persistentState.getProperty("treeType") +
-    //            "; Notes: " + persistentState.getProperty("notes") +
-    //            "; Status: " + persistentState.getProperty("status") +
-    //            "; Updated: " + persistentState.getProperty("dateStatusUpdated");
-    //}
 }
