@@ -3,6 +3,7 @@ package model;
 import impresario.IView;
 
 public class AddATree extends EntityBase implements IView {
+    Tree TreeToAdd;
     AddATree() {
 
     }

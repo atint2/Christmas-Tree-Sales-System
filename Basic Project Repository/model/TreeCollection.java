@@ -66,7 +66,7 @@ public class TreeCollection  extends EntityBase implements IView
 
                 if (tree != null)
                 {
-                    addAccount(tree);
+                    addTree(tree);
                 }
             }
 
@@ -84,7 +84,7 @@ public class TreeCollection  extends EntityBase implements IView
     }
 
     //----------------------------------------------------------------------------------
-    private void addAccount(Tree a)
+    private void addTree(Tree a)
     {
         //accounts.add(a);
         int index = findIndexToAdd(a);
