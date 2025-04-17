@@ -8,6 +8,7 @@ public class RegisterAScout extends EntityBase implements IView {
     RegisterAScout() {
 
     }
+
     public String getState(String x) {
 
     }
