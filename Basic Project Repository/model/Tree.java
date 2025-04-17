@@ -29,7 +29,7 @@ public class Tree extends EntityBase implements IView {
             // There should be EXACTLY one account. More than that is an error
             if (size != 1)
             {
-                throw new InvalidPrimaryKeyException("Multiple accounts matching id : "
+                throw new InvalidPrimaryKeyException("Multiple trees matching id : "
                         + barcode + " found.");
             }
             else

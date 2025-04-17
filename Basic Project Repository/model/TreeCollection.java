@@ -132,10 +132,10 @@ public class TreeCollection  extends EntityBase implements IView
     //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("Accounts"))
+        if (key.equals("Tree"))
             return trees;
         else
-        if (key.equals("AccountList"))
+        if (key.equals("TreeList"))
             return this;
         return null;
     }
@@ -154,7 +154,7 @@ public class TreeCollection  extends EntityBase implements IView
         for (int cnt = 0; cnt < trees.size(); cnt++)
         {
             Tree nextAcct = trees.elementAt(cnt);
-            String nextAccNum = (String)nextAcct.getState("AccountNumber");
+            String nextAccNum = (String)nextAcct.getState("barcode");
             if (nextAccNum.equals(accountNumber) == true)
             {
                 retValue = nextAcct;
@@ -176,14 +176,14 @@ public class TreeCollection  extends EntityBase implements IView
     protected void createAndShowView()
     {
 
-        Scene localScene = myViews.get("AccountCollectionView");
+        Scene localScene = myViews.get("TreeCollectionView");
 
         if (localScene == null)
         {
             // create our new view
-            View newView = ViewFactory.createView("AccountCollectionView", this);
+            View newView = ViewFactory.createView("TreeCollectionView", this);
             localScene = new Scene(newView);
-            myViews.put("AccountCollectionView", localScene);
+            myViews.put("TreeCollectionView", localScene);
         }
         // make the view visible by installing it into the frame
         swapToView(localScene);

@@ -10,13 +10,13 @@ public class ViewFactory {
 		 if(viewName.equals("TransactionChoiceView"))
 		{
 			return new TransactionChoiceView(model);
-		}
-		else if (viewName.equals("ScoutSearchView"))
-		{
-			return new ScoutSearchView(model);
+//		}
+//		else if (viewName.equals("ScoutSearchView"))
+//		{
+//			return new ScoutSearchView(model);
 		} else if (viewName.equals("EnterTreeInfoView"))
 		 {
-			return new EnterTreeInfoView();
+			return new EnterTreeInfoView(model);
 		 }
 		else
 			return null;
