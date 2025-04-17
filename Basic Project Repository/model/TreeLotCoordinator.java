@@ -102,7 +102,7 @@ public class TreeLotCoordinator implements IView, IModel
                 || key.equals("RemoveTree") || key.equals("SellTree")) {
             String transType = key;
             doTransaction(transType);
-        } else if (key.equals("Done")) {
+        } else if (key.equals("CancelTransaction")) {
             createAndShowTransactionChoiceView();
         }
         myRegistry.updateSubscribers(key, this);
@@ -148,7 +148,6 @@ public class TreeLotCoordinator implements IView, IModel
             currentScene = new Scene(newView);
             myViews.put("TransactionChoiceView", currentScene);
         }
-
 
         // make the view visible by installing it into the frame
         swapToView(currentScene);

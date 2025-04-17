@@ -33,6 +33,9 @@ import impresario.IModel;
 //==============================================================
 public class ScoutSearchView extends View {
 
+    // Properties object to hold Scout search info
+    Properties scoutInfo;
+
     // GUI components
     protected TextField firstName;
     protected TextField middleName;
@@ -66,6 +69,8 @@ public class ScoutSearchView extends View {
         getChildren().add(container);
 
         populateFields();
+
+        myModel.subscribe("TransactionError", this);
     }
 
     // Create the labels and fields
@@ -178,7 +183,8 @@ public class ScoutSearchView extends View {
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
-
+                processScoutInfo();
+                myModel.stateChangeRequest("ScoutInfoEntered", scoutInfo);
             }
         });
         doneCont.getChildren().add(submitButton);
@@ -189,7 +195,7 @@ public class ScoutSearchView extends View {
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
-                myModel.stateChangeRequest("Done", null);
+                myModel.stateChangeRequest("CancelScoutSearch", null);
             }
         });
         doneCont.getChildren().add(cancelButton);
@@ -201,6 +207,18 @@ public class ScoutSearchView extends View {
 
     }
 
+    // Process scout info entered into Properties object scoutInfo
+    public void processScoutInfo() {
+        scoutInfo = new Properties();
+        scoutInfo.setProperty("FirstName", firstName.getText());
+        scoutInfo.setProperty("MiddleName", middleName.getText());
+        scoutInfo.setProperty("LastName", lastName.getText());
+        scoutInfo.setProperty("DateOfBirth", dateOfBirth.getText());
+        scoutInfo.setProperty("PhoneNumber", phoneNumber.getText());
+        scoutInfo.setProperty("Email", email.getText());
+        scoutInfo.setProperty("TroopID", troopID.getText());
+        System.out.println(scoutInfo);
+    }
     // Create the status log field
     //-------------------------------------------------------------
     private MessageView createStatusLog(String initialMessage) {
@@ -213,7 +231,13 @@ public class ScoutSearchView extends View {
     //-------------------------------------------------------------
     public void populateFields()
     {
-
+        firstName.setText("Jane");
+        middleName.setText("Elizabeth");
+        lastName.setText("Doe");
+        dateOfBirth.setText("2004-07-27");
+        phoneNumber.setText("585-395-2222");
+        email.setText("jdoe1@brockport.edu");
+        troopID.setText("112");
     }
 
     /**
