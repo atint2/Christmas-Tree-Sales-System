@@ -23,147 +23,113 @@ import userinterface.WindowPosition;
 abstract public class Transaction implements IView, IModel
 {
 
-	// For Impresario
-	protected Properties dependencies;
-	protected ModelRegistry myRegistry;
+    // For Impresario
+    protected Properties dependencies;
+    protected ModelRegistry myRegistry;
 
-	protected Stage myStage;
-	protected Hashtable<String, Scene> myViews;
+    protected Stage myStage;
+    protected Hashtable<String, Scene> myViews;
 
-	protected AccountHolder myCust;
+    protected AccountHolder myCust;
 
-	protected Vector myAccountIDs;
-	// GUI Components
+    protected Vector myAccountIDs;
+    // GUI Components
 
-	/**
-	 * Constructor for this class.
-	 *
-	 * Transaction remembers all the account IDs for this customer.
-	 * It uses AccountCatalog to create this list of account IDs.
-	 *
-	 */
-	//----------------------------------------------------------
-	protected Transaction(AccountHolder cust) throws Exception
-	{
+    /**
+     * Constructor for this class.
+     *
+     * Transaction remembers all the account IDs for this customer.
+     * It uses AccountCatalog to create this list of account IDs.
+     *
+     */
+    //----------------------------------------------------------
+    protected Transaction() throws Exception
+    {
 
-		myStage = MainStageContainer.getInstance();
-		myViews = new Hashtable<String, Scene>();
-		myCust = cust;
+        myStage = MainStageContainer.getInstance();
+        myViews = new Hashtable<String, Scene>();
 
-		myRegistry = new ModelRegistry("Transaction");
-		if(myRegistry == null)
-		{
-			new Event(Event.getLeafLevelClassName(this), "Transaction",
-				"Could not instantiate Registry", Event.ERROR);
-		}
-		setDependencies();
+        myRegistry = new ModelRegistry("Transaction");
+        if(myRegistry == null)
+        {
+            new Event(Event.getLeafLevelClassName(this), "Transaction",
+                    "Could not instantiate Registry", Event.ERROR);
+        }
+        setDependencies();
 
-	}
+    }
 
-	//----------------------------------------------------------
-	protected abstract void setDependencies();
+    //----------------------------------------------------------
+    protected abstract void setDependencies();
 
-	//---------------------------------------------------------
-	protected abstract Scene createView();
+    //---------------------------------------------------------
+    protected abstract Scene createView();
 
-	/**
-	 * Template method
-	 *
-	 */
-	//---------------------------------------------------------
-	protected void doYourJob()
-	{
-		AccountCatalog catalog = null;
+    /**
+     * Template method
+     *
+     */
+    //---------------------------------------------------------
+    protected void doYourJob()
+    {
+            Scene newScene = createView();
+            swapToView(newScene);
+    }
 
-		try
-		{
-			
-			catalog = new AccountCatalog(myCust);
-			myAccountIDs = (Vector)catalog.getState("AccountNumberList");
-			
-			Scene newScene = createView();
-			
-			swapToView(newScene);
+    // forward declarations
+    //-----------------------------------------------------------
+    public abstract Object getState(String key);
 
-		}
-		catch (Exception ex)
-		{
-				new Event(Event.getLeafLevelClassName(this), "Transaction",
-					"Could not find any accounts for " + myCust.getState("ID"), Event.ERROR);
-		}
-	}
+    //-----------------------------------------------------------
+    public abstract void stateChangeRequest(String key, Object value);
 
-	// forward declarations
-	//-----------------------------------------------------------
-	public abstract Object getState(String key);
+    /** Called via the IView relationship
+     * Re-define in sub-class, if necessary
+     */
+    //----------------------------------------------------------
+    public void updateState(String key, Object value)
+    {
+        stateChangeRequest(key, value);
+    }
 
-	//-----------------------------------------------------------
-	public abstract void stateChangeRequest(String key, Object value);
+    /** Register objects to receive state updates. */
+    //----------------------------------------------------------
+    public void subscribe(String key, IView subscriber)
+    {
+        // DEBUG: System.out.println("Cager[" + myTableName + "].subscribe");
+        // forward to our registry
+        myRegistry.subscribe(key, subscriber);
+    }
 
-	/** Called via the IView relationship
-	 * Re-define in sub-class, if necessary
-	 */
-	//----------------------------------------------------------
-	public void updateState(String key, Object value)
-	{
-		stateChangeRequest(key, value);
-	}
+    /** Unregister previously registered objects. */
+    //----------------------------------------------------------
+    public void unSubscribe(String key, IView subscriber)
+    {
+        // DEBUG: System.out.println("Cager.unSubscribe");
+        // forward to our registry
+        myRegistry.unSubscribe(key, subscriber);
+    }
 
-	/** Register objects to receive state updates. */
-	//----------------------------------------------------------
-	public void subscribe(String key, IView subscriber)
-	{
-		// DEBUG: System.out.println("Cager[" + myTableName + "].subscribe");
-		// forward to our registry
-		myRegistry.subscribe(key, subscriber);
-	}
+    //-----------------------------------------------------------------------------
+    public void swapToView(Scene newScene)
+    {
 
-	/** Unregister previously registered objects. */
-	//----------------------------------------------------------
-	public void unSubscribe(String key, IView subscriber)
-	{
-		// DEBUG: System.out.println("Cager.unSubscribe");
-		// forward to our registry
-		myRegistry.unSubscribe(key, subscriber);
-	}
+        if (newScene == null)
+        {
+            System.out.println("Transaction.swapToView(): Missing view for display");
+            new Event(Event.getLeafLevelClassName(this), "swapToView",
+                    "Missing view for display ", Event.ERROR);
+            return;
+        }
 
-	/**
-	 * Create an account (based on account number passed to you from the view)
-	 */
-	//----------------------------------------------------------
-	protected Account createAccount(String accountNumber) throws
-		InvalidPrimaryKeyException
-	{
-		return new Account(accountNumber);
-	}
 
-	//----------------------------------------------------------
-	public Vector getAccountList()
-	{
-		return myAccountIDs;
-	}
+        myStage.setScene(newScene);
+        myStage.sizeToScene();
 
-	//-----------------------------------------------------------------------------
-	public void swapToView(Scene newScene)
-	{
-		
-		if (newScene == null)
-		{
-			System.out.println("Transaction.swapToView(): Missing view for display");
-			new Event(Event.getLeafLevelClassName(this), "swapToView",
-				"Missing view for display ", Event.ERROR);
-			return;
-		}
 
-		
-		myStage.setScene(newScene);
-		myStage.sizeToScene();
-		
-			
-		//Place in center
-		WindowPosition.placeCenter(myStage);
+        //Place in center
+        WindowPosition.placeCenter(myStage);
 
-	}
+    }
 
 }
-
