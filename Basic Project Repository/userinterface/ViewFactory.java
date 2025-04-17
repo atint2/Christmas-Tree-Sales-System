@@ -1,6 +1,7 @@
 package userinterface;
 
 import impresario.IModel;
+import model.ScoutCollection;
 
 //==============================================================================
 public class ViewFactory {
@@ -13,8 +14,12 @@ public class ViewFactory {
             case "ScoutSearchView":
                 return new ScoutSearchView(model);
             case "EnterTreeInfoView":
-                //return new EnterTreeInfoView();
+                //return new EnterTreeInfoView(model);
 				return null;
+            case "ScoutCollectionView":
+                return new ScoutCollectionView(model);
+            case "ScoutView":
+                //return new UpdateScoutView(model);
             default:
                 return null;
         }

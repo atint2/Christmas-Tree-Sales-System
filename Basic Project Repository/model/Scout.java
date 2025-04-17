@@ -32,13 +32,13 @@ public class Scout extends EntityBase implements IView
 
     // constructor for this class
     //----------------------------------------------------------
-    public Scout(String scoutId)
+    public Scout(String ID)
             throws InvalidPrimaryKeyException
     {
         super(myTableName);
 
         setDependencies();
-        String query = "SELECT * FROM " + myTableName + " WHERE (scoutId = " + scoutId + ")";
+        String query = "SELECT * FROM " + myTableName + " WHERE (ID = " + ID + ")";
 
         Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
@@ -51,7 +51,7 @@ public class Scout extends EntityBase implements IView
             if (size != 1)
             {
                 throw new InvalidPrimaryKeyException("Multiple scouts matching id : "
-                        + scoutId + " found.");
+                        + ID + " found.");
             }
             else
             {
@@ -78,7 +78,7 @@ public class Scout extends EntityBase implements IView
         else
         {
             throw new InvalidPrimaryKeyException("No Scout matching id : "
-                    + scoutId + " found.");
+                    + ID + " found.");
         }
     }
 
@@ -155,8 +155,8 @@ public class Scout extends EntityBase implements IView
     //----------------------------------------------------------------
     public static int compare(Scout a, Scout b)
     {
-        String aNum = (String)a.getState("scoutId");
-        String bNum = (String)b.getState("scoutId");
+        String aNum = (String)a.getState("ID");
+        String bNum = (String)b.getState("ID");
 
         return aNum.compareTo(bNum);
     }
@@ -185,22 +185,22 @@ public class Scout extends EntityBase implements IView
     {
         try
         {
-            if (persistentState.getProperty("scoutId") != null)
+            if (persistentState.getProperty("ID") != null)
             {
                 // update
                 Properties whereClause = new Properties();
-                whereClause.setProperty("scoutId",
-                        persistentState.getProperty("scoutId"));
+                whereClause.setProperty("ID",
+                        persistentState.getProperty("ID"));
                 updatePersistentState(mySchema, persistentState, whereClause);
-                updateStatusMessage = "Scout data for Scout id : " + persistentState.getProperty("scoutId") + " updated successfully in database!";
+                updateStatusMessage = "Scout data for Scout id : " + persistentState.getProperty("ID") + " updated successfully in database!";
             }
             else
             {
                 // insert
-                Integer scoutId =
+                Integer ID =
                         insertAutoIncrementalPersistentState(mySchema, persistentState);
-                persistentState.setProperty("scoutId", "" + scoutId.intValue());
-                updateStatusMessage = "Scout data for new Scout : " +  persistentState.getProperty("scoutId")
+                persistentState.setProperty("ID", "" + ID.intValue());
+                updateStatusMessage = "Scout data for new Scout : " +  persistentState.getProperty("ID")
                         + "installed successfully in database!";
             }
         }
@@ -222,13 +222,13 @@ public class Scout extends EntityBase implements IView
         Vector<String> v = new Vector<String>();
 
         
-        v.addElement(persistentState.getProperty("firstName"));
-        v.addElement(persistentState.getProperty("lastName"));
-        v.addElement(persistentState.getProperty("middleName"));
-        v.addElement(persistentState.getProperty("birthday"));
-		v.addElement(persistentState.getProperty("phone"));
-		v.addElement(persistentState.getProperty("email"));
-		v.addElement(persistentState.getProperty("scoutId"));
+        v.addElement(persistentState.getProperty("FirstName"));
+        v.addElement(persistentState.getProperty("LastName"));
+        v.addElement(persistentState.getProperty("MiddleName"));
+        v.addElement(persistentState.getProperty("DateOfBirth"));
+		v.addElement(persistentState.getProperty("PhoneNumber"));
+		v.addElement(persistentState.getProperty("Email"));
+		v.addElement(persistentState.getProperty("ID"));
 
         return v;
     }
