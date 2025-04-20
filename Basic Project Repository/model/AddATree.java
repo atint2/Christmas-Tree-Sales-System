@@ -3,12 +3,13 @@ package model;
 import impresario.IView;
 
 public class AddATree extends EntityBase implements IView {
-    Tree TreeToAdd;
-    AddATree() {
 
+    protected AddATree(String tablename) {
+        super(tablename);
     }
-    public String getState(String x) {
 
+    public String getState(String x) {
+    return null;
     }
     public void stateChangeRequest(String x, Object y) {
 
