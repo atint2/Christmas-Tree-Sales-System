@@ -77,9 +77,9 @@ public class ScoutSearchView extends View {
     //-------------------------------------------------------------
     private VBox createTitle() {
         VBox container = new VBox(10);
-        Text titleText = new Text("       CHRISTMAS TREE SALES SYSTEM          ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
+        Text titleText = new Text("CHRISTMAS TREE SALES SYSTEM");
+        titleText.setFont(Font.font("Garamond", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(400);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);

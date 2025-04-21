@@ -72,9 +72,9 @@ public class UpdateScoutView extends View {
     //-------------------------------------------------------------
     private VBox createTitle() {
         VBox container = new VBox(10);
-        Text titleText = new Text("       CHRISTMAS TREE SALES SYSTEM          ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
+        Text titleText = new Text("CHRISTMAS TREE SALES SYSTEM");
+        titleText.setFont(Font.font("Garamond", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(400);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);
@@ -99,7 +99,7 @@ public class UpdateScoutView extends View {
         Font myFont = Font.font("Garamond", FontWeight.BOLD, 15);
 
         // Add TextFields
-        Text prompt = new Text("SCOUT INFORMATION");
+        Text prompt = new Text("UPDATE SCOUT INFORMATION");
         prompt.setWrappingWidth(400);
         prompt.setFont(Font.font("Garamond", FontWeight.BOLD, 17));
         prompt.setTextAlignment(TextAlignment.CENTER);

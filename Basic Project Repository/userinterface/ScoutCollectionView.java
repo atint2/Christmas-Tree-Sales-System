@@ -91,9 +91,9 @@ public class ScoutCollectionView extends View {
     //-------------------------------------------------------------
     private VBox createTitle() {
         VBox container = new VBox(10);
-        Text titleText = new Text("       CHRISTMAS TREE SALES SYSTEM          ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
+        Text titleText = new Text("CHRISTMAS TREE SALES SYSTEM");
+        titleText.setFont(Font.font("Garamond", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(400);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);
@@ -116,10 +116,10 @@ public class ScoutCollectionView extends View {
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text prompt = new Text("LIST OF SCOUTS");
-        prompt.setWrappingWidth(350);
+        prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
-        prompt.setFont(myFont);
+        prompt.setFont(Font.font("Garamond", FontWeight.BOLD, 17));
         grid.add(prompt, 0, 0, 2, 1);
 
         tableOfScouts = new TableView<ScoutTableModel>();
@@ -183,6 +183,7 @@ public class ScoutCollectionView extends View {
         scoutID.setEditable(true);
 
         submitButton = new Button("Submit");
+        submitButton.setFont(myFont);
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -194,6 +195,7 @@ public class ScoutCollectionView extends View {
         });
 
         cancelButton = new Button("Back");
+        cancelButton.setFont(myFont);
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
