@@ -164,7 +164,36 @@ public class Scout extends EntityBase implements IView
     //-----------------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
+        if (key.equals("UpdateScout")) {
+            updateScoutData((Properties)value);
+        } else if (key.equals("FirstName") || key.equals("MiddleName") ||
+                key.equals("LastName") || key.equals("DateOfBirth") ||
+                key.equals("PhoneNumber") || key.equals("Email") ||
+                key.equals("TroopID")) {
+            persistentState.setProperty(key, (String)value);
+        }
         myRegistry.updateSubscribers(key, this);
+    }
+
+    //-----------------------------------------------------------------------------------
+    public void updateScoutData(Properties props) {
+        // Store the updated properties in the persistent state
+        Enumeration allKeys = props.propertyNames();
+        while (allKeys.hasMoreElements()) {
+            String nextKey = (String) allKeys.nextElement();
+            String nextValue = props.getProperty(nextKey);
+            if (nextValue != null) {
+                persistentState.setProperty(nextKey, nextValue);
+            }
+        }
+
+        // Update the database
+        save();
+
+        updateStatusMessage = "Scout data for Scout : " +  persistentState.getProperty("ID")
+                + "updated successfully in database!";
+
+        stateChangeRequest("UpdateStatusMessage", updateStatusMessage);
     }
 
     /** Called via the IView relationship */
@@ -221,14 +250,14 @@ public class Scout extends EntityBase implements IView
     {
         Vector<String> v = new Vector<String>();
 
-        
-        v.addElement(persistentState.getProperty("FirstName"));
-        v.addElement(persistentState.getProperty("LastName"));
-        v.addElement(persistentState.getProperty("MiddleName"));
-        v.addElement(persistentState.getProperty("DateOfBirth"));
-		v.addElement(persistentState.getProperty("PhoneNumber"));
-		v.addElement(persistentState.getProperty("Email"));
-		v.addElement(persistentState.getProperty("ID"));
+        v.addElement(persistentState.getProperty("ID"));          // First element should be ID
+        v.addElement(persistentState.getProperty("FirstName"));   // Second element is FirstName
+        v.addElement(persistentState.getProperty("MiddleName"));  // Third element is MiddleName
+        v.addElement(persistentState.getProperty("LastName"));    // Fourth element is LastName
+        v.addElement(persistentState.getProperty("DateOfBirth")); // Fifth element is DateOfBirth
+        v.addElement(persistentState.getProperty("PhoneNumber")); // Sixth element is PhoneNumber
+        v.addElement(persistentState.getProperty("Email"));       // Seventh element is Email
+        v.addElement(persistentState.getProperty("TroopID"));     // Eighth element is TroopID
 
         return v;
     }
