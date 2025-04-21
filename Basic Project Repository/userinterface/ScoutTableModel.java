@@ -17,14 +17,14 @@ public class ScoutTableModel {
     //----------------------------------------------------------------------------
     public ScoutTableModel(Vector<String> scoutData)
     {
-        scoutID =  new SimpleStringProperty(scoutData.elementAt(0));
-        firstName =  new SimpleStringProperty(scoutData.elementAt(1));
-        middleName =  new SimpleStringProperty(scoutData.elementAt(2));
-        lastName =  new SimpleStringProperty(scoutData.elementAt(3));
-        dateOfBirth =  new SimpleStringProperty(scoutData.elementAt(4));
-        phoneNumber =  new SimpleStringProperty(scoutData.elementAt(5));
-        email =  new SimpleStringProperty(scoutData.elementAt(6));
-        troopID =  new SimpleStringProperty(scoutData.elementAt(7));
+        scoutID =  new SimpleStringProperty(scoutData.elementAt(0));  // ID
+        firstName =  new SimpleStringProperty(scoutData.elementAt(1));   // FirstName
+        middleName =  new SimpleStringProperty(scoutData.elementAt(2)); // MiddleName
+        lastName =  new SimpleStringProperty(scoutData.elementAt(3)); // LastName
+        dateOfBirth =  new SimpleStringProperty(scoutData.elementAt(4)); // DateOfBirth
+        phoneNumber =  new SimpleStringProperty(scoutData.elementAt(5));      // PhoneNumber
+        email =  new SimpleStringProperty(scoutData.elementAt(6));    // Email
+        troopID =  new SimpleStringProperty(scoutData.elementAt(7));    // TroopID
     }
 
     //----------------------------------------------------------------------------

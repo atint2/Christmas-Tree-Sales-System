@@ -18,8 +18,8 @@ public class ViewFactory {
 				return null;
             case "ScoutCollectionView":
                 return new ScoutCollectionView(model);
-            case "ScoutView":
-                //return new UpdateScoutView(model);
+            case "UpdateScoutView":
+                return new UpdateScoutView(model);
             default:
                 return null;
         }
