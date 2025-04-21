@@ -83,7 +83,6 @@ public class ScoutCollection  extends EntityBase implements IView
     // ScoutCollection constructor that uses Properties object
     public ScoutCollection(Properties props) throws Exception {
         super(myTableName);
-        System.out.println("ScoutCollection(Properties props)");
         // Build a query string with non-null properties
         String query = "SELECT * FROM " + myTableName + " WHERE 1=1";
 
@@ -108,8 +107,6 @@ public class ScoutCollection  extends EntityBase implements IView
         if (props.getProperty("TroopID") != null && !props.getProperty("TroopID").isEmpty()) {
             query += " AND (TroopID = '" + props.getProperty("TroopID") + "')";
         }
-
-        System.out.println("Query: " + query);
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
@@ -175,7 +172,7 @@ public class ScoutCollection  extends EntityBase implements IView
     //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("Scout"))
+        if (key.equals("Scouts"))
             return scouts;
         else
         if (key.equals("ScoutList"))

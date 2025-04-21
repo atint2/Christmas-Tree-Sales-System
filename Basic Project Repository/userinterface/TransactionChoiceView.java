@@ -73,16 +73,16 @@ public class TransactionChoiceView extends View {
     //-------------------------------------------------------------
     private VBox createTitle() {
         VBox container = new VBox(10);
-        Text titleText = new Text("       CHRISTMAS TREE SALES SYSTEM          ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
+        Text titleText = new Text("CHRISTMAS TREE SALES SYSTEM");
+        titleText.setFont(Font.font("Garamond", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(400);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);
 
         Text inquiryText = new Text("What do you wish to do today?");
-        inquiryText.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        inquiryText.setWrappingWidth(300);
+        inquiryText.setFont(Font.font("Garamond", FontWeight.BOLD, 17));
+        inquiryText.setWrappingWidth(400);
         inquiryText.setTextAlignment(TextAlignment.CENTER);
         inquiryText.setFill(Color.BLACK);
         container.getChildren().add(inquiryText);
@@ -102,9 +102,10 @@ public class TransactionChoiceView extends View {
         Font myFont = Font.font("Garamond", FontWeight.BOLD, 15);
 
         // Add Buttons
+        // Shift container
         // Start Shift Button
-        HBox ssCont = new HBox(10);
-        ssCont.setAlignment(Pos.CENTER);
+        HBox shiftCont = new HBox(10);
+        shiftCont.setAlignment(Pos.CENTER);
         startShiftButton = new Button("Start Shift");
         startShiftButton.setFont(myFont);
         startShiftButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -113,13 +114,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("StartShift", null);
             }
         });
-        ssCont.getChildren().add(startShiftButton);
-
-        container.getChildren().add(ssCont);
+        shiftCont.getChildren().add(startShiftButton);
 
         // End Shift Button
-        HBox esCont = new HBox(10);
-        esCont.setAlignment(Pos.CENTER);
         endShiftButton = new Button("End Shift");
         endShiftButton.setFont(myFont);
         endShiftButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -129,13 +126,17 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("EndShift", null);
             }
         });
-        esCont.getChildren().add(endShiftButton);
+        shiftCont.getChildren().add(endShiftButton);
 
-        container.getChildren().add(esCont);
+        container.getChildren().add(shiftCont);
 
+        // Add whitespace
+        container.getChildren().add(new Label(" "));
+
+        // Scout container
         // Add Scout Button
-        HBox asCont = new HBox(10);
-        asCont.setAlignment(Pos.CENTER);
+        HBox scoutCont = new HBox(10);
+        scoutCont.setAlignment(Pos.CENTER);
         addScoutButton = new Button("Add Scout");
         addScoutButton.setFont(myFont);
         addScoutButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -145,13 +146,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("AddScout", null);
             }
         });
-        asCont.getChildren().add(addScoutButton);
-
-        container.getChildren().add(asCont);
+        scoutCont.getChildren().add(addScoutButton);
 
         // Update Scout Button
-        HBox usCont = new HBox(10);
-        usCont.setAlignment(Pos.CENTER);
         updateScoutButton = new Button("Update Scout");
         updateScoutButton.setFont(myFont);
         updateScoutButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -161,13 +158,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("UpdateScout", null);
             }
         });
-        usCont.getChildren().add(updateScoutButton);
-
-        container.getChildren().add(usCont);
+        scoutCont.getChildren().add(updateScoutButton);
 
         // Remove Scout Button
-        HBox rsCont = new HBox(10);
-        rsCont.setAlignment(Pos.CENTER);
         removeScoutButton = new Button("Remove Scout");
         removeScoutButton.setFont(myFont);
         removeScoutButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -177,13 +170,17 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("RemoveScout", null);
             }
         });
-        rsCont.getChildren().add(removeScoutButton);
+        scoutCont.getChildren().add(removeScoutButton);
 
-        container.getChildren().add(rsCont);
+        container.getChildren().add(scoutCont);
 
+        // Add whitespace
+        container.getChildren().add(new Label(" "));
+
+        // Tree Type container
         // Add Tree Type Button
-        HBox attCont = new HBox(10);
-        attCont.setAlignment(Pos.CENTER);
+        HBox treeTypeCont = new HBox(10);
+        treeTypeCont.setAlignment(Pos.CENTER);
         addTreeTypeButton = new Button("Add Tree Type");
         addTreeTypeButton.setFont(myFont);
         addTreeTypeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,29 +190,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("AddTreeType", null);
             }
         });
-        attCont.getChildren().add(addTreeTypeButton);
-
-        container.getChildren().add(attCont);
-
-        // Add Tree Button
-        HBox atCont = new HBox(10);
-        atCont.setAlignment(Pos.CENTER);
-        addTreeButton = new Button("Add Tree");
-        addTreeButton.setFont(myFont);
-        addTreeButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                myModel.stateChangeRequest("AddTree", null);
-            }
-        });
-        atCont.getChildren().add(addTreeButton);
-
-        container.getChildren().add(atCont);
+        treeTypeCont.getChildren().add(addTreeTypeButton);
 
         // Update Tree Type Button
-        HBox uttCont = new HBox(10);
-        uttCont.setAlignment(Pos.CENTER);
         updateTreeTypeButton = new Button("Update Tree Type");
         updateTreeTypeButton.setFont(myFont);
         updateTreeTypeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -225,13 +202,29 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("UpdateTreeType", null);
             }
         });
-        uttCont.getChildren().add(updateTreeTypeButton);
+        treeTypeCont.getChildren().add(updateTreeTypeButton);
 
-        container.getChildren().add(uttCont);
+        container.getChildren().add(treeTypeCont);
+
+        // Add whitespace
+        container.getChildren().add(new Label(" "));
+
+        // Tree container
+        // Add Tree Button
+        HBox treeCont = new HBox(10);
+        treeCont.setAlignment(Pos.CENTER);
+        addTreeButton = new Button("Add Tree");
+        addTreeButton.setFont(myFont);
+        addTreeButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                myModel.stateChangeRequest("AddTree", null);
+            }
+        });
+        treeCont.getChildren().add(addTreeButton);
 
         // Update Tree Button
-        HBox utCont = new HBox(10);
-        utCont.setAlignment(Pos.CENTER);
         updateTreeButton = new Button("Update Tree");
         updateTreeButton.setFont(myFont);
         updateTreeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -241,13 +234,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("UpdateTree", null);
             }
         });
-        utCont.getChildren().add(updateTreeButton);
-
-        container.getChildren().add(utCont);
+        treeCont.getChildren().add(updateTreeButton);
 
         // Remove Tree Button
-        HBox rtCont = new HBox(10);
-        rtCont.setAlignment(Pos.CENTER);
         removeTreeButton = new Button("Remove Tree");
         removeTreeButton.setFont(myFont);
         removeTreeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -257,13 +246,9 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("RemoveTree", null);
             }
         });
-        rtCont.getChildren().add(removeTreeButton);
-
-        container.getChildren().add(rtCont);
+        treeCont.getChildren().add(removeTreeButton);
 
         // Sell Tree Button
-        HBox stCont = new HBox(10);
-        stCont.setAlignment(Pos.CENTER);
         sellTreeButton = new Button("Sell Tree");
         sellTreeButton.setFont(myFont);
         sellTreeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -273,9 +258,12 @@ public class TransactionChoiceView extends View {
                 myModel.stateChangeRequest("SellTree", null);
             }
         });
-        stCont.getChildren().add(sellTreeButton);
+        treeCont.getChildren().add(sellTreeButton);
 
-        container.getChildren().add(stCont);
+        container.getChildren().add(treeCont);
+
+        // Add whitespace
+        container.getChildren().add(new Label(" "));
 
         // Done Button
         HBox doneCont = new HBox(10);

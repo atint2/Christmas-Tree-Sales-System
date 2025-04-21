@@ -77,9 +77,9 @@ public class ScoutSearchView extends View {
     //-------------------------------------------------------------
     private VBox createTitle() {
         VBox container = new VBox(10);
-        Text titleText = new Text("       CHRISTMAS TREE SALES SYSTEM          ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
+        Text titleText = new Text("CHRISTMAS TREE SALES SYSTEM");
+        titleText.setFont(Font.font("Garamond", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(400);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);
@@ -217,8 +217,8 @@ public class ScoutSearchView extends View {
         scoutInfo.setProperty("PhoneNumber", phoneNumber.getText());
         scoutInfo.setProperty("Email", email.getText());
         scoutInfo.setProperty("TroopID", troopID.getText());
-        System.out.println(scoutInfo);
     }
+
     // Create the status log field
     //-------------------------------------------------------------
     private MessageView createStatusLog(String initialMessage) {
@@ -231,13 +231,6 @@ public class ScoutSearchView extends View {
     //-------------------------------------------------------------
     public void populateFields()
     {
-        firstName.setText("Jane");
-        middleName.setText("Elizabeth");
-        lastName.setText("Doe");
-        dateOfBirth.setText("2004-07-27");
-        phoneNumber.setText("585-395-2222");
-        email.setText("jdoe1@brockport.edu");
-        troopID.setText("112");
     }
 
     /**
