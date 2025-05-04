@@ -22,11 +22,12 @@ public class TransactionFactory
 		Transaction retValue;
 
 		switch (transType) {
-			//case "AddScout": retValue = new AddScoutTransaction();
 			case "UpdateScout":
 				retValue = new UpdateScoutTransaction();
 				break;
-			//case "RemoveScout": retValue = new RemoveScoutTransaction();
+			case "RemoveScout":
+				retValue = new RemoveScoutTransaction();
+				break;
 			default: retValue = null;
 		}
 

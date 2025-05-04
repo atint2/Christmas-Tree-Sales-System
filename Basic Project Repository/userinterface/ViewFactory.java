@@ -13,13 +13,12 @@ public class ViewFactory {
                 return new TransactionChoiceView(model);
             case "ScoutSearchView":
                 return new ScoutSearchView(model);
-            case "EnterTreeInfoView":
-                //return new EnterTreeInfoView(model);
-				return null;
             case "ScoutCollectionView":
                 return new ScoutCollectionView(model);
             case "UpdateScoutView":
                 return new UpdateScoutView(model);
+            case "ConfirmRemoveScoutView":
+                return new ConfirmScoutRemovalView(model);
             default:
                 return null;
         }

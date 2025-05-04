@@ -185,7 +185,7 @@ public class UpdateScoutView extends View {
                 clearFields();
 
                 // Display update status message
-                displayMessage((String)myModel.getState("UpdateStatusMessage"));
+                displayMessage((String) myModel.getState("UpdateStatusMessage"));
             }
         });
 
@@ -254,16 +254,16 @@ public class UpdateScoutView extends View {
     // Populate fields with current scout data
     //-------------------------------------------------------------
     public void populateFields() {
-        Scout scout = (Scout)myModel.getState("Scout");
+        Scout scout = (Scout) myModel.getState("Scout");
 
         if (scout != null) {
-            firstName.setText((String)scout.getState("FirstName"));
-            middleName.setText((String)scout.getState("MiddleName"));
-            lastName.setText((String)scout.getState("LastName"));
-            dateOfBirth.setText((String)scout.getState("DateOfBirth"));
-            phoneNumber.setText((String)scout.getState("PhoneNumber"));
-            email.setText((String)scout.getState("Email"));
-            troopID.setText((String)scout.getState("TroopID"));
+            firstName.setText((String) scout.getState("FirstName"));
+            middleName.setText((String) scout.getState("MiddleName"));
+            lastName.setText((String) scout.getState("LastName"));
+            dateOfBirth.setText((String) scout.getState("DateOfBirth"));
+            phoneNumber.setText((String) scout.getState("PhoneNumber"));
+            email.setText((String) scout.getState("Email"));
+            troopID.setText((String) scout.getState("TroopID"));
         }
     }
 
@@ -285,7 +285,7 @@ public class UpdateScoutView extends View {
     //---------------------------------------------------------
     public void updateState(String key, Object value) {
         if (key.equals("UpdateStatusMessage")) {
-            displayMessage((String)value);
+            displayMessage((String) value);
         }
     }
 
@@ -312,5 +312,4 @@ public class UpdateScoutView extends View {
     public void clearErrorMessage() {
         statusLog.clearErrorMessage();
     }
-
 }

@@ -29,10 +29,6 @@ abstract public class Transaction implements IView, IModel
 
     protected Stage myStage;
     protected Hashtable<String, Scene> myViews;
-
-    protected AccountHolder myCust;
-
-    protected Vector myAccountIDs;
     // GUI Components
 
     /**

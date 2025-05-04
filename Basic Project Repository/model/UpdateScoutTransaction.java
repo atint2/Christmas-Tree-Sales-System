@@ -22,7 +22,6 @@ public class UpdateScoutTransaction extends Transaction {
     private Scout selectedScout;
 
     // GUI Components
-
     private String transactionErrorMessage = "";
     private String updateStatusMessage = "";
 
@@ -83,10 +82,14 @@ public class UpdateScoutTransaction extends Transaction {
             }
         } else if (key.equals("ScoutSelected")) {
             String scoutID = (String) value;
-            selectedScout = scouts.retrieve(scoutID);
+            try {
+                selectedScout = scouts.retrieve(scoutID);
+            } catch (Exception ex) {
+                transactionErrorMessage = "Scout ID not in database";
+            }
             createAndShowUpdateScoutView();
         } else if (key.equals("UpdateScoutInfo")) {
-            updateScoutInDatabase((Properties)value);
+            updateScoutInDatabase((Properties) value);
         } else if (key.equals("CancelScoutUpdate")) {
             createAndShowScoutListView();
         }
@@ -97,12 +100,12 @@ public class UpdateScoutTransaction extends Transaction {
     private void updateScoutInDatabase(Properties props) {
         if (selectedScout != null) {
             // Make sure we preserve the Scout ID
-            props.setProperty("ID", (String)selectedScout.getState("ID"));
+            props.setProperty("ID", (String) selectedScout.getState("ID"));
 
             // Update the scout's persistent state with new values
             Enumeration allKeys = props.propertyNames();
             while (allKeys.hasMoreElements()) {
-                String nextKey = (String)allKeys.nextElement();
+                String nextKey = (String) allKeys.nextElement();
                 String nextValue = props.getProperty(nextKey);
 
                 // Update the scout object's state
