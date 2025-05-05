@@ -8,7 +8,7 @@ import java.util.Properties;
 import java.util.Vector;
 
 public class Tree extends EntityBase implements IView {
-    private static final String myTableName = "Account";
+    private static final String myTableName = "Tree";
     protected Properties dependencies;
 
     private String updateStatusMessage = "";

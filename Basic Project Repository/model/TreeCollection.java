@@ -20,61 +20,54 @@ import userinterface.ViewFactory;
 //==============================================================
 public class TreeCollection  extends EntityBase implements IView
 {
-    private static final String myTableName = "Account";
+    private static final String myTableName = "Tree";
 
     private Vector<Tree> trees;
     // GUI Components
 
     // constructor for this class
     //----------------------------------------------------------
-    public TreeCollection( AccountHolder cust) throws
+    public TreeCollection(Properties props) throws
             Exception
     {
         super(myTableName);
+        System.out.println("TreeCollection(Properties props)");
+        // Build a query string with non-null properties
+        String query = "SELECT * FROM " + myTableName + " WHERE 1=1";
 
-        if (cust == null)
-        {
-            new Event(Event.getLeafLevelClassName(this), "<init>",
-                    "Missing account holder information", Event.FATAL);
-            throw new Exception
-                    ("UNEXPECTED ERROR: AccountCollection.<init>: account holder information is null");
+        if (props.getProperty("Barcode") != null && !props.getProperty("Barcode").isEmpty()) {
+            query += " AND (Barcode = '" + props.getProperty("Barcode") + "')";
+        }
+        if (props.getProperty("TreeType") != null && !props.getProperty("MiddleName").isEmpty()) {
+            query += " AND (TreeType = '" + props.getProperty("MiddleName") + "')";
+        }
+        if (props.getProperty("Notes") != null && !props.getProperty("LastName").isEmpty()) {
+            query += " AND (Notes = '" + props.getProperty("LastName") + "')";
+        }
+        if (props.getProperty("Notes") != null && !props.getProperty("DateOfBirth").isEmpty()) {
+            query += " AND (Notes = '" + props.getProperty("DateOfBirth") + "')";
+        }
+        if (props.getProperty("Status") != null && !props.getProperty("PhoneNumber").isEmpty()) {
+            query += " AND (Status = '" + props.getProperty("PhoneNumber") + "')";
+        }
+        if (props.getProperty("DateStatusUpdated") != null && !props.getProperty("Email").isEmpty()) {
+            query += " AND (DateStatusUpdated = '" + props.getProperty("Email") + "')";
         }
 
-        String accountHolderId = (String)cust.getState("ID");
-
-        if (accountHolderId == null)
-        {
-            new Event(Event.getLeafLevelClassName(this), "<init>",
-                    "Data corrupted: Account Holder has no id in database", Event.FATAL);
-            throw new Exception
-                    ("UNEXPECTED ERROR: AccountCollection.<init>: Data corrupted: account holder has no id in repository");
-        }
-
-        String query = "SELECT * FROM " + myTableName + " WHERE (OwnerID = " + accountHolderId + ")";
+        System.out.println("Query: " + query);
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
-        if (allDataRetrieved != null)
-        {
+        if (allDataRetrieved != null && allDataRetrieved.size() > 0) {
             trees = new Vector<Tree>();
 
-            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
-            {
-                Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
-
-                Tree tree = new Tree(nextAccountData);
-
-                if (tree != null)
-                {
-                    addTree(tree);
-                }
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+                Properties nextTreeData = (Properties)allDataRetrieved.elementAt(cnt);
+                Tree tree = new Tree(nextTreeData);
+                addTree(tree);
             }
-
-        }
-        else
-        {
-            throw new InvalidPrimaryKeyException("No accounts for customer : "
-                    + accountHolderId + ". Name : " + cust.getState("Name"));
+        } else {
+            trees = new Vector<Tree>(); // Return empty collection instead of throwing exception
         }
 
     }
