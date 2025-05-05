@@ -17,7 +17,7 @@ public class ViewFactory {
                 return new ScoutCollectionView(model);
             case "UpdateScoutView":
                 return new UpdateScoutView(model);
-            case "ConfirmRemoveScoutView":
+            case "ConfirmScoutRemovalView":
                 return new ConfirmScoutRemovalView(model);
             default:
                 return null;
