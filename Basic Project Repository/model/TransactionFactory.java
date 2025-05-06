@@ -34,6 +34,9 @@ public class TransactionFactory
 			case "AddTree":
 				retValue = new AddATreeTransaction();
 				break;
+			case "UpdateTree":
+				retValue = new UpdateTreeTransaction();
+				break;
 			default: retValue = null;
 		}
 

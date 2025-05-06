@@ -25,6 +25,8 @@ public class ViewFactory {
                 return new EnterTreeInfoView(model);
             case "ConfirmTreeRemovalView":
                 return new ConfirmTreeRemovalView(model);
+            case "UpdateTreeView":
+                return new UpdateTreeView(model);
             default:
                 return null;
         }

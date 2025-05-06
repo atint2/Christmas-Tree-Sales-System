@@ -118,20 +118,19 @@ public class TreeCollection  extends EntityBase implements IView
         return low;
     }
 
-
-    /**
-     *
-     */
-    //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("Tree"))
+        if (key.equals("Trees"))
             return trees;
         else
         if (key.equals("TreeList"))
             return this;
         return null;
     }
+    /**
+     *
+     */
+    //----------------------------------------------------------
 
     //----------------------------------------------------------------
     public void stateChangeRequest(String key, Object value)

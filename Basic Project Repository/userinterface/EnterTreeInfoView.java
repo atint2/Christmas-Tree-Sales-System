@@ -204,37 +204,6 @@ public class EnterTreeInfoView extends View {
         String status_text = status.getText();
 
         processTree(barcode_text, treeType_text, notes_text, status_text);
-
-        // do the withdraw
-
-//        String selectedAccountNumber = accountNumbers.getValue();
-//
-//        String amountEntered = amount.getText();
-//
-//        if ((amountEntered == null) || (amountEntered.length() == 0))
-//        {
-//            displayErrorMessage("Please enter an amount to withdraw");
-//        }
-//        else
-//        {
-//            try
-//            {
-//                double amountVal = Double.parseDouble(amountEntered);
-//                if (amountVal <= 0)
-//                {
-//                    displayErrorMessage("Invalid amount: Please re-enter");
-//                }
-//                else
-//                {
-//                    processTree(selectedAccountNumber, amountEntered);
-//                }
-//            }
-//            catch (Exception ex)
-//            {
-//                displayErrorMessage("Invalid amount: Please re-enter");
-//            }
-//
-//        }
     }
     private void processTree(String barcode_text, String treeType_text, String notes_text, String status_text)
     {
