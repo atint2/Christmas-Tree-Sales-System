@@ -126,4 +126,14 @@ public class Tree extends EntityBase implements IView {
             throw new SQLException("Cannot delete Tree: Barcode is missing.");
         }
     }
+    public void addTree() throws SQLException {
+        if (persistentState.getProperty("Barcode") == null) {
+            Properties whereClause = new Properties();
+            whereClause.setProperty("Barcode", persistentState.getProperty("Barcode"));
+            insertPersistentState(mySchema, whereClause);
+            updateStatusMessage = "Tree with barcode: " + persistentState.getProperty("Barcode") + " added to database!";
+        } else {
+            throw new SQLException("Tree barcode already exists");
+        }
+    }
 }

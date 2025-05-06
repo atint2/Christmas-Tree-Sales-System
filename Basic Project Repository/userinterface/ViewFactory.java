@@ -21,6 +21,8 @@ public class ViewFactory {
                 return new ConfirmScoutRemovalView(model);
             case "ScanTreeBarcodeView":
                 return new ScanTreeBarcodeView(model);
+            case "EnterTreeInfoView":
+                return new EnterTreeInfoView(model);
             case "ConfirmTreeRemovalView":
                 return new ConfirmTreeRemovalView(model);
             default:
