@@ -43,11 +43,11 @@ public class Scout extends EntityBase implements IView {
 
         Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
-        // You must get one account at least
+        // You must get one scout at least
         if (allDataRetrieved != null) {
             int size = allDataRetrieved.size();
 
-            // There should be EXACTLY one account. More than that is an error
+            // There should be EXACTLY one scout. More than that is an error
             if (size != 1) {
                 throw new InvalidPrimaryKeyException("Multiple scouts matching id : "
                         + ID + " found.");
