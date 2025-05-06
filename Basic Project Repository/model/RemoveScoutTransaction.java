@@ -84,10 +84,10 @@ public class RemoveScoutTransaction extends Transaction {
             String scoutID = (String) value;
             try {
                 selectedScout = scouts.retrieve(scoutID);
+                createAndShowConfirmRemoveScoutView();
             } catch (Exception ex) {
                 transactionErrorMessage = "Scout ID not in database";
             }
-            createAndShowConfirmRemoveScoutView();
         } else if (key.equals("RemoveScout")) {
             removeScoutFromDatabase();
         } else if (key.equals("CancelScoutRemove")) {

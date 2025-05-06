@@ -84,10 +84,10 @@ public class UpdateScoutTransaction extends Transaction {
             String scoutID = (String) value;
             try {
                 selectedScout = scouts.retrieve(scoutID);
+                createAndShowUpdateScoutView();
             } catch (Exception ex) {
                 transactionErrorMessage = "Scout ID not in database";
             }
-            createAndShowUpdateScoutView();
         } else if (key.equals("UpdateScoutInfo")) {
             updateScoutInDatabase((Properties) value);
         } else if (key.equals("CancelScoutUpdate")) {

@@ -19,6 +19,10 @@ public class ViewFactory {
                 return new UpdateScoutView(model);
             case "ConfirmScoutRemovalView":
                 return new ConfirmScoutRemovalView(model);
+            case "ScanTreeBarcodeView":
+                return new ScanTreeBarcodeView(model);
+            case "ConfirmTreeRemovalView":
+                return new ConfirmTreeRemovalView(model);
             default:
                 return null;
         }

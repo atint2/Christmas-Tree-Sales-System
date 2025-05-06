@@ -28,6 +28,9 @@ public class TransactionFactory
 			case "RemoveScout":
 				retValue = new RemoveScoutTransaction();
 				break;
+			case "RemoveTree":
+				retValue = new RemoveTreeTransaction();
+				break;
 			default: retValue = null;
 		}
 
