@@ -102,6 +102,7 @@ public class TreeLotCoordinator implements IView, IModel
                 || key.equals("RemoveTree") || key.equals("SellTree")) {
             String transType = key;
             doTransaction(transType);
+            System.out.println("d");
         } else if (key.equals("CancelTransaction")) {
             createAndShowTransactionChoiceView();
         }

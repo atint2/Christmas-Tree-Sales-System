@@ -6,6 +6,7 @@ package model;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -18,7 +19,7 @@ import userinterface.ViewFactory;
 
 public class AddATreeTransaction extends Transaction {
     private TreeCollection trees;
-    private Tree selectedTrees;
+    private Tree selectedTree;
 
     // GUI Components
 
@@ -32,19 +33,19 @@ public class AddATreeTransaction extends Transaction {
     protected void setDependencies() {
         dependencies = new Properties();
         dependencies.setProperty("TreeInfoEntered", "TransactionError");
-        dependencies.setProperty("OK", "CancelTransaction");
+        dependencies.setProperty("OK", "CancelAddTree");
         myRegistry.setDependencies(dependencies);
     }
 
     protected Scene createView() {
         Scene currentScene = myViews.get("EnterTreeInfoView");
-
+        System.out.println("hello");
+        // create our initial view
         if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("EnterTreeInfoView", this);
             currentScene = new Scene(newView);
-            myViews.put("TreeSearchView", currentScene);
-
+            myViews.put("EnterTreeInfoView", currentScene);
             return currentScene;
         } else {
             return currentScene;
@@ -52,21 +53,35 @@ public class AddATreeTransaction extends Transaction {
     }
 
     public Object getState(String key) {
+        if (key.equals("")) {
+
+        }
         return null;
     }
 
     public void stateChangeRequest(String key, Object value) {
-        if (key.equals("TreeInfoEntered")) {
+        if (key.equals("DoYourJob")) {
+            doYourJob();
+        } else if (key.equals("TreeInfoEntered")) {
+            System.out.println("Hello");
+
             Properties treeInfo = (Properties)value;
             try {
                 trees = new TreeCollection(treeInfo);
                 System.out.println("adding tree");
-                createAndShowAddTreeView();
             } catch (Exception ex) {
                 transactionErrorMessage = "Error adding tree";
             }
         }
         myRegistry.updateSubscribers(key, this);
+    }
+
+    private void addTreeToDatabase() {
+        try {
+            selectedTree.
+        } catch (Exception e) {
+            treeUpdateStatusMessage = "Error adding tree" + e.getMessage();
+        }
     }
 
     //------------------------------------------------------

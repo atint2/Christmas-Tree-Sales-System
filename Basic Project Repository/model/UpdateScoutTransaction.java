@@ -73,7 +73,6 @@ public class UpdateScoutTransaction extends Transaction {
         } else if (key.equals("ScoutSelected")) {
             String scoutID = (String)value;
             selectedScout = scouts.retrieve(scoutID);
-
             createAndShowUpdateScoutView();
         }
         myRegistry.updateSubscribers(key, this);

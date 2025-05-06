@@ -16,6 +16,7 @@ public class ViewFactory {
 //			return new ScoutSearchView(model);
 		} else if (viewName.equals("EnterTreeInfoView"))
 		 {
+			 System.out.println("helo");
 			return new EnterTreeInfoView(model);
 		 }
 		else

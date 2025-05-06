@@ -169,7 +169,7 @@ public class EnterTreeInfoView extends View {
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("CancelWithdraw", null);
+                myModel.stateChangeRequest("CancelTransaction", null);
             }
         });
 

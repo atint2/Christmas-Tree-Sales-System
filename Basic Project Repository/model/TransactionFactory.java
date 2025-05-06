@@ -23,6 +23,9 @@ public class TransactionFactory
 
 		switch (transType) {
 			//case "AddScout": retValue = new AddScoutTransaction();
+			case "AddTree":
+				retValue = new AddATreeTransaction();
+				break;
 			case "UpdateScout":
 				retValue = new UpdateScoutTransaction();
 				break;
